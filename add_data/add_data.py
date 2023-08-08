@@ -6,8 +6,8 @@ from pymongo import MongoClient
 MONGO_HOST = 'mongodb'
 MONGO_PORT = 27017
 MONGO_DB = 'usernames'
-MONGO_USER = 'fastapi_user'
-MONGO_PASS = 'your_password_here'
+MONGO_USER = 'anas'
+MONGO_PASS = 'asecretpassword'
 
 def callback(ch, method, properties, body):
     username = body.decode()
@@ -29,8 +29,8 @@ def callback(ch, method, properties, body):
 def consume_queue():
     connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
     channel = connection.channel()
-    channel.queue_declare(queue='username_queue')
-    channel.basic_consume(queue='username_queue', on_message_callback=callback)
+    channel.queue_declare(queue='user_data')
+    channel.basic_consume(queue='user_data', on_message_callback=callback)
     print('Waiting for messages...')
     channel.start_consuming()
 

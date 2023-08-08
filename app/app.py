@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pika
+from time import sleep
 
 class User(BaseModel):
     username: str
@@ -22,7 +23,7 @@ def send_message(message, rabbitmq_host):
 async def add_user(user: User):
     try:
         send_message(user.username, rabbitmq_host='rabbitmq')
-        sleep(5)
+        sleep(2)
         return {'username': user.username + ' added successfully'}
     except Exception as e:
         print(e)
