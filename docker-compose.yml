@@ -10,7 +10,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin_password
     volumes:
-      - mongo_dato:/data/db
+      - mongo_data:/data/db
 
   rabbitmq:
     image: rabbitmq
@@ -40,4 +40,4 @@ services:
       - rabbitmq
 
 volumes:
-  mongo_dato:
+  mongo_data:
