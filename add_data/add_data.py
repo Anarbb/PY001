@@ -12,6 +12,7 @@ MONGO_PASS = 'asecretpassword'
 def callback(ch, method, properties, body):
     username = body.decode()
     print(f"Received message: {username}")
+    time.sleep(5)
 
     # Connect to MongoDB and save the username in the database
     client = MongoClient(MONGO_HOST, MONGO_PORT,
@@ -32,6 +33,7 @@ def consume_queue():
     channel.queue_declare(queue='user_data')
     channel.basic_consume(queue='user_data', on_message_callback=callback)
     print('Waiting for messages...')
+
     channel.start_consuming()
 
 if __name__ == "__main__":

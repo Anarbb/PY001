@@ -23,7 +23,6 @@ def send_message(message, rabbitmq_host):
 async def add_user(user: User):
     try:
         send_message(user.username, rabbitmq_host='rabbitmq')
-        sleep(2)
         return {'username': user.username + ' added successfully'}
     except Exception as e:
         print(e)
